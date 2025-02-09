@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="manifest" href="static/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="title">Voice Sample Generator - Vocal'z Snap Factory</title>
+    <meta name="description" content="Create unique voice samples with Vocal'z Snap Factory. Choose from vintage radio, preacher, Rastaman, and film noir voices to add a special touch to your music and DJ projects.">
+    <meta name="keywords" content="voice sample generator, voice cloning, vintage radio, preacher, Rastaman, film noir, music producer, DJ, scratch artist, Serato">
+    <style>
+        body {
+            font-family: 'Impact', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            background-image: url('{{ url_for("static", filename="images/background.jpeg") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        h1{
+            text-shadow: 2px 2px 5px #000000;
+            color: #e85354;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(26, 26, 26, 0.88);
+            padding: 20px 20px 40px 20px;
+            border-radius: 30px;
+        }
+
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 270px;
+        }
+
+        .introduction {
+            margin: 0;
+            font-size: 18px;
+            text-align: justify;
+            line-height: 1.6;
+            flex: 1;
+            margin-left: 20px;
+            margin-right: 60px;
+        }
+
+        .voice-selector {
+            width: 100%;
+            padding: 20px 50px 20px 50px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            height: 320px;
+        }
+        
+         .carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .carousel-arrow {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #e85355;
+            font-size: 24px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-arrow.prev {
+           /* position: absolute;*/
+            left: 5px;
+        }
+
+        .carousel-arrow.next {
+            /*position: absolute;*/
+            right: 5px;
+        }
+
+        .carousel-arrow:hover {
+            background-color: #333;
+            transform: scale(1.1);
+        }
+
+        .carousel-arrow:active {
+            transform: scale(0.9);
+        }
+
+        .carousel {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            position: relative;
+            scroll-behavior: smooth;
+            padding: 20px;
+            gap: 20px;
+            z-index: 20;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            display: inline-block;
+            max-width: 200px;
+            height: 250px;
+            margin-right: 20px;
+            background-color: #333;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5%;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.1);
+        }
+
+        .carousel-item.active {
+            transform: scale(1.1);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 15px #ffd700;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            display: block;
+            border-radius: 5%;
+        }
+
+        .carousel-item .voice-label {
+            font-size: 16px;
+            color: #fff;
+            font-family: 'Impact', sans-serif;
+            text-align: center;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        /* Style pour le panneau de sélection */
+        .selected-voice-indicator {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-family: 'Impact', sans-serif;
+            color: #fff;
+            font-size: 14px;
+        }
+        
+        .input-placeholder{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        #text-input {
+            width: 80%;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 18px;
+            border-radius: 15px;
+            border: 2px solid #333;
+            box-sizing: border-box;
+        }
+
+        #inspiration-btn {
+            margin-left: 20px;
+        }
+
+        #create-sample-btn, #download-btn, #inspiration-btn {
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #e85354;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Impact', sans-serif;
+        }
+
+        #create-sample-btn:hover, #download-btn:hover, #inspiration-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Style for the loader */
+        .loader {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loader img {
+            width: 100px;
+        }
+
+        /* Style for the audio player */
+        .audio-player {
+            flex-direction: row;
+            gap: 20px;
+            width: 60%;
+            margin: 20px auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 30px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .audio-player button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .audio-player button:hover {
+            background-color: #cc9900;
+        }
+
+        /* Container for the button and loader */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo {
+                margin-bottom: 20px;
+            }
+
+            .introduction {
+                margin-left: 0;
+            }
+
+            .carousel-item {
+                width: 280px;
+                height: 200px;
+            }
+
+            .carousel-item .voice-label {
+                font-size: 14px;
+            }
+
+            #text-input {
+                width: 80%;
+                font-size: 16px;
+            }
+
+            #create-sample-btn, #download-btn, #inspiration-btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .loader img {
+                width: 80px;
+            }
+
+            .audio-player {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            .introduction {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vocal'z Snap Factory Logo" class="logo">
+            <div class="introduction">
+                <h1>Voice Sample Generator</h1>
+                <p>Need that perfect vintage radio voice? A deep preacher vibe? A gritty film noir narrator? <strong>Vocal'z Snap Factory</strong> lets you create unique voice samples in seconds. Whether you're a music producer, DJ, or scratch artist on Serato, create fire samples instantly.</p>
+            </div>
+        </div>
+        
+        <div class="voice-selector">
+            <div class="carousel">
+                <div class="carousel-item active" data-voice-path="Vintage Radio">
+                    <img src="{{ url_for('static', filename='images/radio.jpeg') }}" alt="Vintage Radio Voice">
+                    <div class="voice-label">Vintage Radio</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Preacher">
+                    <img src="{{ url_for('static', filename='images/precheur.jpeg') }}" alt="Preacher Voice">
+                    <div class="voice-label">Preacher</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Old Rastaman">
+                    <img src="{{ url_for('static', filename='images/rasta.jpg') }}" alt="Old Rastaman Voice">
+                    <div class="voice-label">Old Rastaman</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="voice-label">Film Noir</div>
+                </div>
+            </div>
+                    <!-- Ajout des flèches de navigation -->
+            <div class="carousel-nav">
+                <div class="carousel-arrow prev">❮</div>
+                <div class="carousel-arrow next">❯</div>
+            </div>
+            <div class="selected-voice-indicator">Selected: Vintage Radio</div>
+        </div>
+        
+
+        <div class="input-placeholder">
+            <input type="text" id="text-input" placeholder="Write your text here...">
+            <button id="inspiration-btn">Not inspired?</button>
+        </div>
+
+        <div class="button-container" id="button-container">
+            <button id="create-sample-btn">🔥 Create Sample with Vintage Radio voice 🔥</button>
+            <div class="loader" id="loader">
+                <img src="{{ url_for('static', filename='images/loader.gif') }}" alt="Loading...">
+            </div>
+        </div>
+
+        <!-- Audio player hidden by default -->
+        <div class="audio-player" id="player-container"></div>
+    </div>
+
+    <script>
+        let selectedVoice = 'Vintage Radio';
+        let audioUrl = null;
+        const carousel = document.querySelector('.carousel');
+        const indicators = document.querySelector('.selected-voice-indicator');
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        // Touch swipe handling
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carousel.addEventListener('touchmove', e => {
+            e.preventDefault();
+        });
+
+        carousel.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX > touchEndX + 50) {
+                // Swipe gauche
+                scrollCarousel(-100);
+            } else if (touchEndX > touchStartX + 50) {
+                // Swipe droit
+                scrollCarousel(100);
+            }
+        });
+
+        // Scrolling function
+        function scrollCarousel(scrollAmount) {
+            const currentScroll = carousel.scrollLeft;
+            carousel.scrollLeft = currentScroll + scrollAmount;
+        }
+        
+        // Ajoutez ces fonctions après la fonction scrollCarousel()
+        function navigateLeft() {
+            carousel.scrollLeft = carousel.scrollLeft - 200; // Déplace vers la gauche
+        }
+
+        function navigateRight() {
+            carousel.scrollLeft = carousel.scrollLeft + 200; // Déplace vers la droite
+        }
+
+        // Ajoutez ces événements après l'initialisation des variables
+        const prevArrow = document.querySelector('.prev');
+        const nextArrow = document.querySelector('.next');
+
+        prevArrow.addEventListener('click', navigateLeft);
+        nextArrow.addEventListener('click', navigateRight);
+
+        // Voice selection handling
+        document.querySelectorAll('.carousel-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.carousel-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                selectedVoice = item.dataset.voicePath;
+                indicators.textContent = `Selected: ${selectedVoice}`;
+                document.getElementById('create-sample-btn').innerHTML = 
+                    `🔥 Create sample with <strong>${selectedVoice.charAt(0).toUpperCase() + selectedVoice.slice(1)}</strong> voice 🔥`;
+            });
+        });
+
+        document.getElementById('create-sample-btn').addEventListener('click', async () => {
+            const createSampleBtn = document.getElementById('create-sample-btn');
+            const loader = document.getElementById('loader');
+
+            createSampleBtn.style.display = 'none';
+            loader.style.display = 'block';
+            document.getElementById('player-container').style.display = 'none';
+
+            if (!selectedVoice || !document.getElementById('text-input').value.trim()) {
+                alert('Please choose a voice and write some text!');
+                createSampleBtn.style.display = 'block';
+                loader.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch('/generate-audio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        voiceModelPath: getVoiceModelPath(selectedVoice),
+                        text: document.getElementById('text-input').value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    alert(data.error);
+                    createSampleBtn.style.display = 'block';
+                    loader.style.display = 'none';
+                    return;
+                }
+
+                audioUrl = data.audio_url;
+                createSampleBtn.style.display = 'block';
+                loader.style.display = 'none';
+                updatePlayer();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during sample generation');
+                createSampleBtn.style.display = 'block';
+                loader.style.display = 'none';
+            }
+        });
+
+        function getVoiceModelPath(voiceType) {
+            const voicePaths = {
+                'Vintage Radio': 's3://voice-cloning-zero-shot/46f64ba9-be67-4899-8e49-060fa08c9cdb/radio-voice/manifest.json',
+                'Preacher': 's3://voice-cloning-zero-shot/7eba2ab9-f733-4b44-b390-7f42a3d6cf3d/original/manifest.json',
+                'Old Rastaman': 's3://voice-cloning-zero-shot/ad43873e-280d-4455-96ee-834b33f59816/voice-walking-glide-reggae/manifest.json',
+                'Film Noir': 's3://voice-cloning-zero-shot/0febc340-c457-41ef-ae04-ee67124f0e87/original/manifest.json'
+            };
+
+            return voicePaths[voiceType];
+        }
+
+        function updatePlayer() {
+            const playerContainer = document.getElementById('player-container');
+            playerContainer.innerHTML = `
+                <audio controls>
+                    <source src="${audioUrl}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="button-container">
+                    <button id="download-btn">Download Sample</button>
+                </div>
+            `;
+
+            playerContainer.style.display = 'flex';
+            playerContainer.style.flexDirection = 'row';
+            playerContainer.style.alignItems = 'flex-end';
+
+            document.getElementById('download-btn').addEventListener('click', () => {
+                fetch(audioUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `sample.mp3`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    });
+            });
+        }
+
+        document.getElementById('inspiration-btn').addEventListener('click', () => {
+            fetch('/static/quotes.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomIndex = Math.floor(Math.random() * data.length);
+                    const randomQuote = data[randomIndex].quote;
+                    document.getElementById('text-input').value = randomQuote;
+                })
+                .catch(error => console.error('Error fetching quotes:', error));
+        });
+    </script>
+</body>
+</html>
