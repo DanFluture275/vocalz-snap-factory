@@ -108,7 +108,7 @@ def generate_audio():
 
         # Génère un identifiant unique pour le fichier audio
         file_id = str(uuid.uuid4())
-        file_path = os.path.join(AUDIO_TEMP_DIR, f'{file_id}.wav')
+        file_path = os.path.join(AUDIO_TEMP_DIR, f'{file_id}.mp3')
         
         # Écrit le flux audio dans le fichier
         with open(file_path, 'wb') as f:
@@ -117,7 +117,7 @@ def generate_audio():
         
         # Retourne l'URL où le fichier peut être téléchargé
         return jsonify({
-            'audio_url': f'/serve-audio/{file_id}.wav'
+            'audio_url': f'/serve-audio/{file_id}.mp3'
         })
     
     except Exception as e:
