@@ -102,9 +102,9 @@ def generate_audio():
         if not client:
             return jsonify({'error': 'Client PlayHT non initialisé'}), 500
 
-        options = TTSOptions(voice=voice_model_path)
+        options = TTSOptions(voice=voice_model_path, language='FRENCH')
 
-        response = client.tts(text, options, voice_engine='PlayDialog-http')
+        response = client.tts(text, options, voice_engine='Play3.0-mini-http')
 
         # Génère un identifiant unique pour le fichier audio
         file_id = str(uuid.uuid4())
