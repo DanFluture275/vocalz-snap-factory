@@ -104,11 +104,11 @@ def generate_audio():
 
         options = TTSOptions(voice=voice_model_path)
 
-        response = client.tts(text, options, voice_engine='Play3.0-mini', protocol='http')
+        response = client.tts(text, options, voice_engine='Play3.0-mini', protocol='http', output_format='wav')
 
         # Génère un identifiant unique pour le fichier audio
         file_id = str(uuid.uuid4())
-        file_path = os.path.join(AUDIO_TEMP_DIR, f'{file_id}.mp3')
+        file_path = os.path.join(AUDIO_TEMP_DIR, f'{file_id}.wav'
         
         # Écrit le flux audio dans le fichier
         with open(file_path, 'wb') as f:
@@ -117,7 +117,7 @@ def generate_audio():
         
         # Retourne l'URL où le fichier peut être téléchargé
         return jsonify({
-            'audio_url': f'/serve-audio/{file_id}.mp3'
+            'audio_url': f'/serve-audio/{file_id}.wav'
         })
     
     except Exception as e:
