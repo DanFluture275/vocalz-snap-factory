@@ -104,7 +104,7 @@ def generate_audio():
 
         options = TTSOptions(voice=voice_model_path)
 
-        response = client.tts(text, options, voice_engine='Play3.0-mini', protocol='http', output_format='wav')
+        response = client.tts(text, options, voice_engine='Play3.0-mini', protocol='http')
 
         # Génère un identifiant unique pour le fichier audio
         file_id = str(uuid.uuid4())
