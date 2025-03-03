@@ -550,7 +550,7 @@ carousel.addEventListener('touchend', e => {
                         const url = window.URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = url;
-                        a.download = `sample.mp3`;
+                        a.download = `sample.wav`;
                         document.body.appendChild(a);
                         a.click();
                         document.body.removeChild(a);
