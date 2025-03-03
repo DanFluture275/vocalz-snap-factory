@@ -30,6 +30,10 @@ clients = {
     "Film Noir": Client(
         user_id=os.getenv("FILMNOIR.GUI_USER_ID"),
         api_key=os.getenv("FILMNOIR.GUI_API_KEY"),
+    ),
+    "Epic Cinematic": Client(
+        user_id=os.getenv("EPIC_CINEMATIC.GUI_USER_ID"),
+        api_key=os.getenv("EPIC_CINEMATIC.GUI_API_KEY"),
     )
 }
 
@@ -95,6 +99,9 @@ def generate_audio():
         #compte Izwi
         elif '0febc340-c457-41ef-ae04-ee67124f0e87/original/manifest.json' in voice_model_path:
             voice_type = 'Film Noir'
+        #compte vocalzsnap1
+        elif 'f8736760-92c8-4f2f-9d8b-038299901243/original/manifest.json' in voice_model_path:
+            voice_type = 'Epic Cinematic'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
 
