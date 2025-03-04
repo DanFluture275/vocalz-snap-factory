@@ -34,6 +34,10 @@ clients = {
     "Epic Trailer": Client(
         user_id=os.getenv("EPIC_TRAILER.GUI_USER_ID"),
         api_key=os.getenv("EPIC_TRAILER.GUI_API_KEY"),
+    ),
+    "Funky": Client(
+        user_id=os.getenv("FUNKY.GUI_USER_ID"),
+        api_key=os.getenv("FUNKY.GUI_API_KEY"),
     )
 }
 
@@ -102,6 +106,9 @@ def generate_audio():
         #compte vocalzsnap1
         elif 'f8736760-92c8-4f2f-9d8b-038299901243/original/manifest.json' in voice_model_path:
             voice_type = 'Epic Trailer'
+        #compte dannasse
+        elif 'dd9ac98c-bb73-4619-b6c2-8a508070f13d/original/manifest.json' in voice_model_path:
+            voice_type = 'Funky'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
 
