@@ -98,7 +98,7 @@ def generate_audio():
         elif '7eba2ab9-f733-4b44-b390-7f42a3d6cf3d/original/manifest.json' in voice_model_path:
             voice_type = 'Preacher'
         #compte glide orchestra
-        elif 'voice-walking-glide-reggae/manifest.json' in voice_model_path:
+        elif 'ff240cd0-de2b-4c6c-8634-f802be2a73e0/original/manifest.json' in voice_model_path:
             voice_type = 'Old Rastaman'
         #compte Izwi
         elif '26c2de86-1c4f-4e33-9950-767f9f0b07ad/original/manifest.json' in voice_model_path:
