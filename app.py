@@ -107,7 +107,7 @@ def generate_audio():
         elif 'f8736760-92c8-4f2f-9d8b-038299901243/original/manifest.json' in voice_model_path:
             voice_type = 'Epic Trailer'
         #compte dannasse
-        elif 'dd9ac98c-bb73-4619-b6c2-8a508070f13d/original/manifest.json' in voice_model_path:
+        elif '4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json' in voice_model_path:
             voice_type = 'Funky'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
