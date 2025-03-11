@@ -351,9 +351,9 @@
                     <img src="{{ url_for('static', filename='images/funky.jpeg') }}" alt="Funky Voice">
                     <div class="voice-label">Funky</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Film Noir">
-                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
-                    <div class="voice-label">Film Noir</div>
+                <div class="carousel-item" data-voice-path="Vintage Documentary">
+                    <img src="{{ url_for('static', filename='images/vintage_documentary.jpeg') }}" alt="Vintage Documentary Voice">
+                    <div class="voice-label">Vintage Documentary</div>
                 </div>
                 <div class="carousel-item" data-voice-path="Film Noir">
                     <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
@@ -523,7 +523,8 @@ carousel.addEventListener('touchend', e => {
                 'Old Rastaman': 's3://voice-cloning-zero-shot/ff240cd0-de2b-4c6c-8634-f802be2a73e0/original/manifest.json',
                 'Film Noir': 's3://voice-cloning-zero-shot/26c2de86-1c4f-4e33-9950-767f9f0b07ad/original/manifest.json',
                 'Epic Trailer': 's3://voice-cloning-zero-shot/988aab38-552c-4fa4-88ce-37538ba0c71b/original/manifest.json',
-                'Funky': 's3://voice-cloning-zero-shot/4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json'
+                'Funky': 's3://voice-cloning-zero-shot/4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json',
+                'Vintage documentary' : 's3://voice-cloning-zero-shot/a0b0002b-952d-44b6-ac6f-33c4751f4b8b/original/manifest.json'
             };
 
             return voicePaths[voiceType];

@@ -39,6 +39,11 @@ clients = {
         user_id=os.getenv("PLAYHT_USER_ID"),
         api_key=os.getenv("PLAYHT_API_KEY"),
     )
+    ,
+    "Vintage Documentary": Client(
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
+    )
 }
 
 # Répertoire pour stocker les fichiers audio temporaires
@@ -109,6 +114,8 @@ def generate_audio():
         #compte dannasse
         elif '4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json' in voice_model_path:
             voice_type = 'Funky'
+        elif 'a0b0002b-952d-44b6-ac6f-33c4751f4b8b/original/manifest.json' in voice_model_path:
+            voice_type = 'Vintage Documentary'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
 
