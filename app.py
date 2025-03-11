@@ -141,7 +141,8 @@ def generate_audio():
             top_p=0.8,                # Sélection plus variée des sons
             text_guidance=3.0,        # Moins rigide sur le texte
             voice_guidance=7.0,       # Fidèle à la voix du modèle mais expressive
-            style_guidance=8.0        # Accentuation forte du style et des émotions
+            style_guidance=8.0,       # Accentuation forte du style et des émotions
+            speed=0.7                 # Vitesse
         )
 
 
