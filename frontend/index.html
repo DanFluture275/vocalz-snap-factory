@@ -467,7 +467,7 @@
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
             isSwiping = false;
-        }, { pass   ive: true });
+        }, { passive: true });
 
         carousel.addEventListener('touchmove', e => {
             let touchMoveX = e.touches[0].clientX;
