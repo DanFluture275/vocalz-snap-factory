@@ -38,9 +38,12 @@ clients = {
     "Funky": Client(
         user_id=os.getenv("PLAYHT_USER_ID"),
         api_key=os.getenv("PLAYHT_API_KEY"),
-    )
-    ,
+    ),
     "Vintage Documentary": Client(
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
+    ),
+    "Italian Mafiosi": Client(
         user_id=os.getenv("PLAYHT_USER_ID"),
         api_key=os.getenv("PLAYHT_API_KEY"),
     )
@@ -116,6 +119,8 @@ def generate_audio():
             voice_type = 'Funky'
         elif 'a0b0002b-952d-44b6-ac6f-33c4751f4b8b/original/manifest.json' in voice_model_path:
             voice_type = 'Vintage Documentary'
+        elif 'd69c5b6a-83e3-4f02-9daa-78c33e1a0cc4/original/manifest.json' in voice_model_path:
+            voice_type = 'Italian Mafiosi'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
 
