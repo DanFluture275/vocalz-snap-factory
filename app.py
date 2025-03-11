@@ -16,28 +16,28 @@ app = Flask(__name__, template_folder='frontend')
 # Initialisation des clients PlayHT pour chaque voix
 clients = {
     "Vintage Radio": Client(
-        user_id=os.getenv("RADIO_USER_ID"),
-        api_key=os.getenv("RADIO_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     ),
     "Preacher": Client(
-        user_id=os.getenv("PREECHEUR_USER_ID"),
-        api_key=os.getenv("PREECHEUR_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     ),
     "Old Rastaman": Client(
-        user_id=os.getenv("RASTA_USER_ID"),
-        api_key=os.getenv("RASTA_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     ),
     "Film Noir": Client(
-        user_id=os.getenv("FILMNOIR.GUI_USER_ID"),
-        api_key=os.getenv("FILMNOIR.GUI_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     ),
     "Epic Trailer": Client(
-        user_id=os.getenv("EPIC_TRAILER.GUI_USER_ID"),
-        api_key=os.getenv("EPIC_TRAILER.GUI_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     ),
     "Funky": Client(
-        user_id=os.getenv("FUNKY.GUI_USER_ID"),
-        api_key=os.getenv("FUNKY.GUI_API_KEY"),
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     )
 }
 
