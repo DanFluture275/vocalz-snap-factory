@@ -359,9 +359,9 @@
                     <img src="{{ url_for('static', filename='images/italian_mafiosi.jpeg') }}" alt="Italian Mafiosi Voice">
                     <div class="voice-label">Italian Mafiosi</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Film Noir">
-                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
-                    <div class="voice-label">Film Noir</div>
+                <div class="carousel-item" data-voice-path="Grandma">
+                    <img src="{{ url_for('static', filename='images/grandma.jpeg') }}" alt="Grandma Voice">
+                    <div class="voice-label">Grandma</div>
                 </div>
             </div>
                     <!-- Ajout des flèches de navigation -->
@@ -525,7 +525,8 @@ carousel.addEventListener('touchend', e => {
                 'Epic Trailer': 's3://voice-cloning-zero-shot/988aab38-552c-4fa4-88ce-37538ba0c71b/original/manifest.json',
                 'Funky': 's3://voice-cloning-zero-shot/4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json',
                 'Vintage Documentary' : 's3://voice-cloning-zero-shot/a0b0002b-952d-44b6-ac6f-33c4751f4b8b/original/manifest.json', 
-                'Italian Mafiosi' :'s3://voice-cloning-zero-shot/d69c5b6a-83e3-4f02-9daa-78c33e1a0cc4/original/manifest.json'
+                'Italian Mafiosi' :'s3://voice-cloning-zero-shot/d69c5b6a-83e3-4f02-9daa-78c33e1a0cc4/original/manifest.json',
+                'Grandma' : 's3://voice-cloning-zero-shot/2b82ecbf-d4b3-4a8e-a492-f14aef010de7/original/manifest.json'
             };
 
             return voicePaths[voiceType];

@@ -46,6 +46,10 @@ clients = {
     "Italian Mafiosi": Client(
         user_id=os.getenv("PLAYHT_USER_ID"),
         api_key=os.getenv("PLAYHT_API_KEY"),
+    ),
+    "Grandma": Client(
+        user_id=os.getenv("PLAYHT_USER_ID"),
+        api_key=os.getenv("PLAYHT_API_KEY"),
     )
 }
 
@@ -121,6 +125,8 @@ def generate_audio():
             voice_type = 'Vintage Documentary'
         elif 'd69c5b6a-83e3-4f02-9daa-78c33e1a0cc4/original/manifest.json' in voice_model_path:
             voice_type = 'Italian Mafiosi'
+        elif '2b82ecbf-d4b3-4a8e-a492-f14aef010de7/original/manifest.json' in voice_model_path:
+            voice_type = 'Grandma'
         else:
             return jsonify({'error': 'Voix non supportée'}), 400
 
@@ -128,9 +134,18 @@ def generate_audio():
         if not client:
             return jsonify({'error': 'Client PlayHT non initialisé'}), 500
 
-        options = TTSOptions(voice=voice_model_path)
+        #options = TTSOptions(voice=voice_model_path)
+        options = TTSOptions(
+            voice=voice_model_path,
+            temperature=0.8,          # Plus de variations vocales
+            top_p=0.8,                # Sélection plus variée des sons
+            text_guidance=3.0,        # Moins rigide sur le texte
+            voice_guidance=7.0,       # Fidèle à la voix du modèle mais expressive
+            style_guidance=8.0        # Accentuation forte du style et des émotions
+        )
 
-        response = client.tts(text, options, voice_engine='PlayDialog-http')
+
+        response = client.tts(text, options, voice_engine='Play3.0-mini-http')
 
         # Génère un identifiant unique pour le fichier audio
         file_id = str(uuid.uuid4())
