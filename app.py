@@ -101,10 +101,10 @@ def generate_audio():
         elif 'voice-walking-glide-reggae/manifest.json' in voice_model_path:
             voice_type = 'Old Rastaman'
         #compte Izwi
-        elif '0febc340-c457-41ef-ae04-ee67124f0e87/original/manifest.json' in voice_model_path:
+        elif '26c2de86-1c4f-4e33-9950-767f9f0b07ad/original/manifest.json' in voice_model_path:
             voice_type = 'Film Noir'
         #compte vocalzsnap1
-        elif 'f8736760-92c8-4f2f-9d8b-038299901243/original/manifest.json' in voice_model_path:
+        elif '988aab38-552c-4fa4-88ce-37538ba0c71b/original/manifest.json' in voice_model_path:
             voice_type = 'Epic Trailer'
         #compte dannasse
         elif '4725cfd5-943a-4927-b8d5-90d99cbaf4fd/original/manifest.json' in voice_model_path:
