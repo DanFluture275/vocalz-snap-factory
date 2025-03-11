@@ -92,10 +92,10 @@ def generate_audio():
     try:
         # Détermine la voix utilisée pour sélectionner le client approprié
         #compte dfluture
-        if 'radio-voice/manifest.json' in voice_model_path:
+        if 'da861ac7-44d1-41c2-bdd7-5579b07e46de/original/manifest.json' in voice_model_path:
             voice_type = 'Vintage Radio'
         #compte dan.fmm
-        elif 'original/manifest.json' in voice_model_path:
+        elif '7eba2ab9-f733-4b44-b390-7f42a3d6cf3d/original/manifest.json' in voice_model_path:
             voice_type = 'Preacher'
         #compte glide orchestra
         elif 'voice-walking-glide-reggae/manifest.json' in voice_model_path:
