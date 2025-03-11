@@ -107,6 +107,15 @@ def generate_audio():
     style_guidance = advanced_settings.get('style_guidance', 8.0)  # Valeur par défaut: 8.0
     speed = advanced_settings.get('speed', 0.7)  # Valeur par défaut: 0.7
     
+    # Log des paramètres extraits
+    print(f"temperature: {temperature}")
+    print(f"top_p: {top_p}")
+    print(f"text_guidance: {text_guidance}")
+    print(f"voice_guidance: {voice_guidance}")
+    print(f"style_guidance: {style_guidance}")
+    print(f"speed: {speed}")
+
+    
     if not voice_model_path or not text:
         return jsonify({'error': 'Paramètres manquants'}), 400
 
