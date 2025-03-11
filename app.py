@@ -97,6 +97,15 @@ def generate_audio():
     data = request.json
     voice_model_path = data['voiceModelPath']
     text = data['text']
+    advanced_settings = data.get('advancedSettings', {})
+
+    # Extraction des paramètres des "Advanced Settings" avec des valeurs par défaut
+    temperature = advanced_settings.get('temperature', 0.8)  # Valeur par défaut: 0.8
+    top_p = advanced_settings.get('top_p', 0.8)  # Valeur par défaut: 0.8
+    text_guidance = advanced_settings.get('text_guidance', 3.0)  # Valeur par défaut: 3.0
+    voice_guidance = advanced_settings.get('voice_guidance', 7.0)  # Valeur par défaut: 7.0
+    style_guidance = advanced_settings.get('style_guidance', 8.0)  # Valeur par défaut: 8.0
+    speed = advanced_settings.get('speed', 0.7)  # Valeur par défaut: 0.7
     
     if not voice_model_path or not text:
         return jsonify({'error': 'Paramètres manquants'}), 400
@@ -134,15 +143,15 @@ def generate_audio():
         if not client:
             return jsonify({'error': 'Client PlayHT non initialisé'}), 500
 
-        #options = TTSOptions(voice=voice_model_path)
+       # Nouvelles options avec les paramètres ajustés récupérés de l'utilisateur
         options = TTSOptions(
             voice=voice_model_path,
-            temperature=0.8,          # Plus de variations vocales
-            top_p=0.8,                # Sélection plus variée des sons
-            text_guidance=3.0,        # Moins rigide sur le texte
-            voice_guidance=7.0,       # Fidèle à la voix du modèle mais expressive
-            style_guidance=8.0,       # Accentuation forte du style et des émotions
-            speed=0.7                 # Vitesse
+            temperature=temperature,           # Valeur personnalisée
+            top_p=top_p,                       # Valeur personnalisée
+            text_guidance=text_guidance,       # Valeur personnalisée
+            voice_guidance=voice_guidance,     # Valeur personnalisée
+            style_guidance=style_guidance,     # Valeur personnalisée
+            speed=speed                        # Valeur personnalisée
         )
 
 

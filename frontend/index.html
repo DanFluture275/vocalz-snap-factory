@@ -312,6 +312,47 @@
             .introduction {
                 font-size: 16px;
             }
+            
+            .advanced-settings {
+            display: none;
+            margin-top: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #444;
+            }
+
+            .advanced-settings input {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                font-size: 16px;
+                border-radius: 8px;
+                border: 1px solid #444;
+            }
+
+            .advanced-settings label {
+                color: #fff;
+                font-size: 16px;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .toggle-button {
+                background-color: #e85354;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                margin-top: 15px;
+                transition: background-color 0.3s;
+                font-size: 16px;
+            }
+
+            .toggle-button:hover {
+                background-color: #cc0000;
+            }
         }
     </style>
 </head>
@@ -385,6 +426,28 @@
             </div>
         </div>
 
+        <!-- Advanced Settings Section -->
+        <button class="toggle-button" id="toggle-advanced-settings">Show Advanced Settings</button>
+        <div class="advanced-settings" id="advanced-settings">
+            <label for="speed">⚡ Tempo Boost</label>
+            <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+
+            <label for="temperature">🎲 Spice Level</label>
+            <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7">
+
+            <label for="top_p">🎯 Creative Freedom</label>
+            <input type="range" id="top_p" min="0" max="1" step="0.1" value="0.9">
+
+            <label for="text_guidance">📖 Script Strictness</label>
+            <input type="range" id="text_guidance" min="0" max="1" step="0.1" value="0.5">
+
+            <label for="voice_guidance">🔊 Voice Fidelity</label>
+            <input type="range" id="voice_guidance" min="0" max="1" step="0.1" value="0.8">
+
+            <label for="style_guidance">🎤 Dramatic Flair</label>
+            <input type="range" id="style_guidance" min="0" max="1" step="0.1" value="0.6">
+        </div>
+        
         <!-- Audio player hidden by default -->
         <div class="audio-player" id="player-container"></div>
     </div>
@@ -398,40 +461,40 @@
         let touchEndX = 0;
 
         // Touch swipe handling
-let isSwiping = false;
+        let isSwiping = false;
 
-carousel.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    isSwiping = false;
-}, { passive: true });
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isSwiping = false;
+        }, { pass   ive: true });
 
-carousel.addEventListener('touchmove', e => {
-    let touchMoveX = e.touches[0].clientX;
-    let touchMoveY = e.touches[0].clientY;
+        carousel.addEventListener('touchmove', e => {
+            let touchMoveX = e.touches[0].clientX;
+            let touchMoveY = e.touches[0].clientY;
 
-    let deltaX = touchMoveX - touchStartX;
-    let deltaY = touchMoveY - touchStartY;
+            let deltaX = touchMoveX - touchStartX;
+            let deltaY = touchMoveY - touchStartY;
 
-    // Si le mouvement est principalement horizontal, on considère qu'on swipe
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        isSwiping = true;
-        e.preventDefault(); // Empêche le scroll vertical uniquement si un swipe horizontal est détecté
-    }
-}, { passive: false });
+            // Si le mouvement est principalement horizontal, on considère qu'on swipe
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                isSwiping = true;
+                e.preventDefault(); // Empêche le scroll vertical uniquement si un swipe horizontal est détecté
+            }
+        }, { passive: false });
 
-carousel.addEventListener('touchend', e => {
-    if (!isSwiping) return; // Ignore l'événement si aucun vrai swipe horizontal n'a été détecté
+        carousel.addEventListener('touchend', e => {
+            if (!isSwiping) return; // Ignore l'événement si aucun vrai swipe horizontal n'a été détecté
 
-    let touchEndX = e.changedTouches[0].clientX;
-    let deltaX = touchEndX - touchStartX;
+            let touchEndX = e.changedTouches[0].clientX;
+            let deltaX = touchEndX - touchStartX;
 
-    if (deltaX < -50) {
-        scrollCarousel(-100); // Swipe gauche
-    } else if (deltaX > 50) {
-        scrollCarousel(100); // Swipe droit
-    }
-}, { passive: true });
+            if (deltaX < -50) {
+                scrollCarousel(-100); // Swipe gauche
+            } else if (deltaX > 50) {
+                scrollCarousel(100); // Swipe droit
+            }
+        }, { passive: true });
 
 
         // Scrolling function
@@ -482,6 +545,15 @@ carousel.addEventListener('touchend', e => {
                 loader.style.display = 'none';
                 return;
             }
+            
+            const advancedOptions = {
+                speed: document.getElementById('speed').value,
+                temperature: document.getElementById('temperature').value,
+                top_p: document.getElementById('top_p').value,
+                text_guidance: document.getElementById('text_guidance').value,
+                voice_guidance: document.getElementById('voice_guidance').value,
+                style_guidance: document.getElementById('style_guidance').value
+            };
 
             try {
                 const response = await fetch('/generate-audio', {
@@ -491,7 +563,8 @@ carousel.addEventListener('touchend', e => {
                     },
                     body: JSON.stringify({
                         voiceModelPath: getVoiceModelPath(selectedVoice),
-                        text: document.getElementById('text-input').value
+                        text: document.getElementById('text-input').value,
+                        ...advancedOptions  // Include advanced options
                     })
                 });
 
