@@ -95,9 +95,12 @@ def index():
 @app.route('/generate-audio', methods=['POST'])
 def generate_audio():
     data = request.json
+    print(f"Requête JSON: {data}")
     voice_model_path = data['voiceModelPath']
     text = data['text']
-    advanced_settings = data.get('advancedSettings', {})
+    advanced_settings = data.get('advancedOptions', {})
+    print(f"advancedOptions : {advanced_settings}")
+
 
     # Extraction des paramètres des "Advanced Settings" avec des valeurs par défaut
     temperature = advanced_settings.get('temperature', 0.8)  # Valeur par défaut: 0.8
@@ -108,6 +111,7 @@ def generate_audio():
     speed = advanced_settings.get('speed', 0.7)  # Valeur par défaut: 0.7
     
     # Log des paramètres extraits
+    print(f"Ensuite")
     print(f"voiceModelPath: {voice_model_path}")
     print(f"text: {text}")
     print(f"advancedSettings: {advanced_settings}")
@@ -165,7 +169,8 @@ def generate_audio():
             style_guidance=style_guidance,     # Valeur personnalisée
             speed=speed                        # Valeur personnalisée
         )
-
+        
+        print(f"Enfin Options: {options}")
 
         response = client.tts(text, options, voice_engine='Play3.0-mini-http')
 
