@@ -98,17 +98,15 @@ def generate_audio():
     print(f"Requête JSON: {data}")
     voice_model_path = data['voiceModelPath']
     text = data['text']
-    advanced_settings = data.get('advancedOptions', {})
-    print(f"advancedOptions : {advanced_settings}")
+    
 
-
-    # Extraction des paramètres des "Advanced Settings" avec des valeurs par défaut
-    temperature = advanced_settings.get('temperature', 0.8)  # Valeur par défaut: 0.8
-    top_p = advanced_settings.get('top_p', 0.8)  # Valeur par défaut: 0.8
-    text_guidance = advanced_settings.get('text_guidance', 3.0)  # Valeur par défaut: 3.0
-    voice_guidance = advanced_settings.get('voice_guidance', 7.0)  # Valeur par défaut: 7.0
-    style_guidance = advanced_settings.get('style_guidance', 8.0)  # Valeur par défaut: 8.0
-    speed = advanced_settings.get('speed', 0.7)  # Valeur par défaut: 0.7
+    # Récupérer directement les paramètres de la requête JSON
+    temperature = float(data.get('temperature', 0.8))  # Valeur par défaut: 0.8
+    top_p = float(data.get('top_p', 0.8))  # Valeur par défaut: 0.8
+    text_guidance = float(data.get('text_guidance', 3.0))  # Valeur par défaut: 3.0
+    voice_guidance = float(data.get('voice_guidance', 7.0))  # Valeur par défaut: 7.0
+    style_guidance = float(data.get('style_guidance', 8.0))  # Valeur par défaut: 8.0
+    speed = float(data.get('speed', 0.7))  # Valeur par défaut: 0.7
     
     # Log des paramètres extraits
     print(f"Ensuite")
