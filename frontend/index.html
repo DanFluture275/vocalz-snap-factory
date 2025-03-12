@@ -550,8 +550,8 @@
         document.getElementById('toggle-advanced-settings').addEventListener('click', () => {
             const advancedSettings = document.getElementById('advanced-settings');
             const toggleButton = document.getElementById('toggle-advanced-settings');
-            if (advancedSettings.style.display === 'grid' || advancedSettings.style.display === '') {
-                advancedSettings.style.display = 'block';
+            if (advancedSettings.style.display === 'none' || advancedSettings.style.display === '') {
+                advancedSettings.style.display = 'grid';
                 toggleButton.textContent = 'Hide Advanced Settings';
             } else {
                 advancedSettings.style.display = 'none';
