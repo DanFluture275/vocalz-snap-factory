@@ -281,8 +281,7 @@
 
         .advanced-settings input {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
+            margin-bottom: 15px;
             font-size: 16px;
             border-radius: 8px;
             border: 1px solid #444;
@@ -293,6 +292,13 @@
             font-size: 16px;
             display: block;
             margin-bottom: 8px;
+        }
+        
+        .advanced-settings span {
+            color: #fff;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 20px;
         }
         
         .toggle-button {
@@ -437,21 +443,27 @@
         <div class="advanced-settings" id="advanced-settings">
             <label for="speed">⚡ Tempo Boost</label>
             <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+            <span id="speed-value">1.0</span>
 
             <label for="temperature">🎲 Spice Level</label>
             <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7">
+            <span id="temperature-value">0.7</span>
 
             <label for="top_p">🎯 Creative Freedom</label>
             <input type="range" id="top_p" min="0" max="1" step="0.1" value="0.9">
+            <span id="top_p-value">0.9</span>
 
             <label for="text_guidance">📖 Script Strictness</label>
             <input type="range" id="text_guidance" min="0" max="1" step="0.1" value="0.5">
+            <span id="text_guidance-value">0.5</span>
 
             <label for="voice_guidance">🔊 Voice Fidelity</label>
             <input type="range" id="voice_guidance" min="0" max="1" step="0.1" value="0.8">
+            <span id="voice_guidance-value">0.8</span>
 
             <label for="style_guidance">🎤 Dramatic Flair</label>
             <input type="range" id="style_guidance" min="0" max="1" step="0.1" value="0.6">
+            <span id="style_guidance-value">0.6</span>
         </div>
         
         <!-- Audio player hidden by default -->
@@ -539,11 +551,29 @@
         document.getElementById('toggle-advanced-settings').addEventListener('click', function() {
             const advancedSettings = document.getElementById('advanced-settings');
             if (advancedSettings.style.display === 'none' || advancedSettings.style.display === '') {
-                advancedSettings.style.display = 'block';
+                advancedSettings.style.display = 'flex';
             } else {
                 advancedSettings.style.display = 'none';
             }
         });
+        
+        // Fonction pour mettre à jour la valeur d'un slider
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            valueDisplay.textContent = slider.value;
+            slider.addEventListener('input', function() {
+                valueDisplay.textContent = slider.value;
+            });
+        }
+
+        // Mettre à jour les valeurs des sliders au chargement de la page
+        updateSliderValue('speed', 'speed-value');
+        updateSliderValue('temperature', 'temperature-value');
+        updateSliderValue('top_p', 'top_p-value');
+        updateSliderValue('text_guidance', 'text_guidance-value');
+        updateSliderValue('voice_guidance', 'voice_guidance-value');
+        updateSliderValue('style_guidance', 'style_guidance-value');
 
         document.getElementById('create-sample-btn').addEventListener('click', async () => {
             const createSampleBtn = document.getElementById('create-sample-btn');
