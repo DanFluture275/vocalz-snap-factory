@@ -558,13 +558,9 @@
             console.log("Données envoyées :", {
                 voiceModelPath: selectedVoice,
                 text: document.getElementById('text-input').value,
-                temperature: temperature,
-                top_p: top_p,
-                text_guidance: text_guidance,
-                voice_guidance: voice_guidance,
-                style_guidance: style_guidance,
-                speed: speed
+                ...advancedOptions  // Utilisez les propriétés de advancedOptions ici
             });
+            
             try {
                 const response = await fetch('/generate-audio', {
                     method: 'POST',
