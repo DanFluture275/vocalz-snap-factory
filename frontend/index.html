@@ -267,7 +267,11 @@
         }
         
         .advanced-settings {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             display: none;
+            width: 50%;
             margin-top: 20px;
             background-color: #333;
             padding: 15px;
@@ -290,17 +294,17 @@
             display: block;
             margin-bottom: 8px;
         }
-
+        
         .toggle-button {
             background-color: #e85354;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 30px;
+            border-radius: 15px;
             cursor: pointer;
             margin-top: 15px;
             transition: background-color 0.3s;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .toggle-button:hover {
@@ -427,7 +431,9 @@
         </div>
 
         <!-- Advanced Settings Section -->
-        <button class="toggle-button" id="toggle-advanced-settings">Show Advanced Settings</button>
+        <div class="button-container">
+            <button class="toggle-button" id="toggle-advanced-settings">⚙️ Show Advanced Settings</button>
+        </div>
         <div class="advanced-settings" id="advanced-settings">
             <label for="speed">⚡ Tempo Boost</label>
             <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
