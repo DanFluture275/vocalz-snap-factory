@@ -163,6 +163,31 @@
             padding: 5px;
             margin-top: 5px;
         }
+        
+        .carousel-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #e85355;
+            font-size: 36px;
+            padding: 10px;
+            width: 50px; /* Définir une largeur */
+            height: 50px; /* Définir une hauteur identique */
+            aspect-ratio: 1 / 1; /* Assurer un ratio 1:1 */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+            display: flex; /* Utiliser flexbox pour centrer le contenu */
+            align-items: center; /* Centrer verticalement */
+            justify-content: center; /* Centrer horizontalement */
+        }
+
+        .carousel-item .play-icon:hover {
+            background-color: #333;
+        }
 
         /* Style pour le panneau de sélection */
         .selected-voice-indicator {
@@ -376,40 +401,49 @@
         
         <div class="voice-selector">
             <div class="carousel">
-                <div class="carousel-item active" data-voice-path="Vintage Radio">
+                <div class="carousel-item active" data-voice-path="Vintage Radio" data-audio-url="{{ url_for('static', filename='audio/vintage_radio.mp3') }}">
                     <img src="{{ url_for('static', filename='images/radio.jpeg') }}" alt="Vintage Radio Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Vintage Radio</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Preacher">
+                <div class="carousel-item" data-voice-path="Preacher" data-audio-url="{{ url_for('static', filename='audio/preacher.mp3') }}">
                     <img src="{{ url_for('static', filename='images/precheur.jpeg') }}" alt="Preacher Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Preacher</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Old Rastaman">
+                <div class="carousel-item" data-voice-path="Old Rastaman" data-audio-url="{{ url_for('static', filename='audio/old_rastaman.mp3') }}">
                     <img src="{{ url_for('static', filename='images/rasta.jpg') }}" alt="Old Rastaman Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Old Rastaman</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Film Noir">
+                <div class="carousel-item" data-voice-path="Film Noir" data-audio-url="{{ url_for('static', filename='audio/film_noir.mp3') }}">
                     <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Film Noir</div>
                 </div>
-               <div class="carousel-item" data-voice-path="Epic Trailer">
+               <div class="carousel-item" data-voice-path="Epic Trailer" data-audio-url="{{ url_for('static', filename='audio/epic_trailer.mp3') }}">
                     <img src="{{ url_for('static', filename='images/epic_cinematic.jpeg') }}" alt="Epic Trailer Voice">
-                    <div class="voice-label">Epic Trailer</div>
+                    <div class="play-icon">⏵</div>
+                   <div class="voice-label">Epic Trailer</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Funky">
+                <div class="carousel-item" data-voice-path="Funky" data-audio-url="{{ url_for('static', filename='audio/funky.mp3') }}">
                     <img src="{{ url_for('static', filename='images/funky.jpeg') }}" alt="Funky Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Funky</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Vintage Documentary">
+                <div class="carousel-item" data-voice-path="Vintage Documentary" data-audio-url="{{ url_for('static', filename='audio/vintage_documentary.mp3') }}">
                     <img src="{{ url_for('static', filename='images/vintage_documentary.jpeg') }}" alt="Vintage Documentary Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Vintage Documentary</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Italian Mafiosi">
+                <div class="carousel-item" data-voice-path="Italian Mafiosi" data-audio-url="{{ url_for('static', filename='audio/italian_mafiosi.mp3') }}">
                     <img src="{{ url_for('static', filename='images/italian_mafiosi.jpeg') }}" alt="Italian Mafiosi Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Italian Mafiosi</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Grandma">
+                <div class="carousel-item" data-voice-path="Grandma" data-audio-url="{{ url_for('static', filename='audio/grandma.mp3') }}">
                     <img src="{{ url_for('static', filename='images/grandma.jpeg') }}" alt="Grandma Voice">
+                    <div class="play-icon">⏵</div>
                     <div class="voice-label">Grandma</div>
                 </div>
             </div>
@@ -575,6 +609,45 @@
         updateSliderValue('text_guidance', 'text_guidance-value');
         updateSliderValue('voice_guidance', 'voice_guidance-value');
         updateSliderValue('style_guidance', 'style_guidance-value');
+        
+        // Gestion des boutons play/pause exemples audio
+        document.querySelectorAll('.carousel-item .play-icon').forEach(icon => {
+            let audio = null; // Stocke l'instance Audio pour chaque bouton
+            let isPlaying = false;
+
+            icon.addEventListener('click', (event) => {
+                event.stopPropagation(); // Empêche le clic de sélectionner le carousel-item
+
+                if (!audio) {
+                    const audioUrl = event.target.parentElement.dataset.audioUrl;
+                    audio = new Audio(audioUrl);
+                    audio.addEventListener('ended', () => {
+                        togglePlayPause(icon, false);
+                        isPlaying = false; // Réinitialise l'état après la fin de la lecture
+                    });
+                }
+
+                if (isPlaying) {
+                    audio.pause();
+                    audio.currentTime = 0; // Remet le son au début pour être sûr qu'il recommence bien
+                    togglePlayPause(icon, false);
+                    isPlaying = false;
+                } else {
+                    audio.play();
+                    togglePlayPause(icon, true);
+                    isPlaying = true;
+                }
+            });
+        });
+
+
+        function togglePlayPause(icon, isPlaying) {
+            if (isPlaying) {
+                icon.textContent = '⏸';
+            } else {
+                icon.textContent = '⏵';
+            }
+        }
 
         document.getElementById('create-sample-btn').addEventListener('click', async () => {
             const createSampleBtn = document.getElementById('create-sample-btn');
