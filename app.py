@@ -112,7 +112,7 @@ def generate_audio():
     print(f"Ensuite")
     print(f"voiceModelPath: {voice_model_path}")
     print(f"text: {text}")
-    print(f"advancedSettings: {advanced_settings}")
+    
     print(f"temperature: {temperature}")
     print(f"top_p: {top_p}")
     print(f"text_guidance: {text_guidance}")
