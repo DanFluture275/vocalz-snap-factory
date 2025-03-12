@@ -433,6 +433,9 @@
                 <img src="{{ url_for('static', filename='images/loader.gif') }}" alt="Loading...">
             </div>
         </div>
+        
+        <!-- Audio player hidden by default -->
+        <div class="audio-player" id="player-container"></div>
 
         <!-- Advanced Settings Section -->
         <div class="button-container">
@@ -463,9 +466,6 @@
             <input type="range" id="style_guidance" min="0" max="1" step="0.1" value="0.6">
             <span id="style_guidance-value">0.6</span>
         </div>
-        
-        <!-- Audio player hidden by default -->
-        <div class="audio-player" id="player-container"></div>
     </div>
 
     <script>
