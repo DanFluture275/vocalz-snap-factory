@@ -547,12 +547,15 @@
         });
         
         // Advanced settings display
-        document.getElementById('toggle-advanced-settings').addEventListener('click', function() {
+        document.getElementById('toggle-advanced-settings').addEventListener('click', () => {
             const advancedSettings = document.getElementById('advanced-settings');
-            if (advancedSettings.style.display === 'none' || advancedSettings.style.display === '') {
-                advancedSettings.style.display = 'grid';
+            const toggleButton = document.getElementById('toggle-advanced-settings');
+            if (advancedSettings.style.display === 'grid' || advancedSettings.style.display === '') {
+                advancedSettings.style.display = 'block';
+                toggleButton.textContent = 'Hide Advanced Settings';
             } else {
                 advancedSettings.style.display = 'none';
+                toggleButton.textContent = 'Show Advanced Settings';
             }
         });
         
