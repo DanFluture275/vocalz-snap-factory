@@ -108,6 +108,9 @@ def generate_audio():
     speed = advanced_settings.get('speed', 0.7)  # Valeur par défaut: 0.7
     
     # Log des paramètres extraits
+    print(f"voiceModelPath: {voice_model_path}")
+    print(f"text: {text}")
+    print(f"advancedSettings: {advanced_settings}")
     print(f"temperature: {temperature}")
     print(f"top_p: {top_p}")
     print(f"text_guidance: {text_guidance}")

@@ -554,7 +554,17 @@
                 voice_guidance: document.getElementById('voice_guidance').value,
                 style_guidance: document.getElementById('style_guidance').value
             };
-
+           
+            console.log("Données envoyées :", {
+                voiceModelPath: voiceModelPath,
+                text: text,
+                temperature: temperature,
+                top_p: top_p,
+                text_guidance: text_guidance,
+                voice_guidance: voice_guidance,
+                style_guidance: style_guidance,
+                speed: speed
+            });
             try {
                 const response = await fetch('/generate-audio', {
                     method: 'POST',
