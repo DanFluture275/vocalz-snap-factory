@@ -95,7 +95,6 @@ def index():
 @app.route('/generate-audio', methods=['POST'])
 def generate_audio():
     data = request.json
-    print(f"Requête JSON: {data}")
     voice_model_path = data['voiceModelPath']
     text = data['text']
     
@@ -168,7 +167,7 @@ def generate_audio():
             speed=speed                        # Valeur personnalisée
         )
         
-        print(f"Enfin Options: {options}")
+        print(f"API call options: {options}")
 
         response = client.tts(text, options, voice_engine='Play3.0-mini-http')
 

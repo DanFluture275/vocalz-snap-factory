@@ -265,6 +265,47 @@
             align-items: center;
             margin-top: 20px;
         }
+        
+        .advanced-settings {
+            display: none;
+            margin-top: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #444;
+        }
+
+        .advanced-settings input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        .advanced-settings label {
+            color: #fff;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .toggle-button {
+            background-color: #e85354;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .toggle-button:hover {
+            background-color: #cc0000;
+        }
 
         /* Media queries for responsiveness */
         @media (max-width: 600px) {
@@ -311,47 +352,6 @@
 
             .introduction {
                 font-size: 16px;
-            }
-            
-            .advanced-settings {
-            display: none;
-            margin-top: 20px;
-            background-color: #333;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #444;
-            }
-
-            .advanced-settings input {
-                width: 100%;
-                padding: 10px;
-                margin: 5px 0;
-                font-size: 16px;
-                border-radius: 8px;
-                border: 1px solid #444;
-            }
-
-            .advanced-settings label {
-                color: #fff;
-                font-size: 16px;
-                display: block;
-                margin-bottom: 8px;
-            }
-
-            .toggle-button {
-                background-color: #e85354;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 8px;
-                cursor: pointer;
-                margin-top: 15px;
-                transition: background-color 0.3s;
-                font-size: 16px;
-            }
-
-            .toggle-button:hover {
-                background-color: #cc0000;
             }
         }
     </style>
@@ -503,7 +503,6 @@
             carousel.scrollLeft = currentScroll + scrollAmount;
         }
         
-        // Ajoutez ces fonctions après la fonction scrollCarousel()
         function navigateLeft() {
             carousel.scrollLeft = carousel.scrollLeft - 400; // Déplace vers la gauche
         }
@@ -512,7 +511,6 @@
             carousel.scrollLeft = carousel.scrollLeft + 400; // Déplace vers la droite
         }
 
-        // Ajoutez ces événements après l'initialisation des variables
         const prevArrow = document.querySelector('.prev');
         const nextArrow = document.querySelector('.next');
 
@@ -529,6 +527,16 @@
                 document.getElementById('create-sample-btn').innerHTML = 
                     `🔥 Create sample with <strong>${selectedVoice.charAt(0).toUpperCase() + selectedVoice.slice(1)}</strong> voice 🔥`;
             });
+        });
+        
+        // Advanced settings display
+        document.getElementById('toggle-advanced-settings').addEventListener('click', function() {
+            const advancedSettings = document.getElementById('advanced-settings');
+            if (advancedSettings.style.display === 'none' || advancedSettings.style.display === '') {
+                advancedSettings.style.display = 'block';
+            } else {
+                advancedSettings.style.display = 'none';
+            }
         });
 
         document.getElementById('create-sample-btn').addEventListener('click', async () => {
@@ -554,12 +562,6 @@
                 voice_guidance: document.getElementById('voice_guidance').value,
                 style_guidance: document.getElementById('style_guidance').value
             };
-           
-            console.log("Données envoyées :", {
-                voiceModelPath: selectedVoice,
-                text: document.getElementById('text-input').value,
-                ...advancedOptions  // Utilisez les propriétés de advancedOptions ici
-            });
             
             try {
                 const response = await fetch('/generate-audio', {
