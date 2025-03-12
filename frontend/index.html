@@ -556,8 +556,8 @@
             };
            
             console.log("Données envoyées :", {
-                voiceModelPath: voiceModelPath,
-                text: text,
+                voiceModelPath: selectedVoice,
+                text: document.getElementById('text-input').value,
                 temperature: temperature,
                 top_p: top_p,
                 text_guidance: text_guidance,
