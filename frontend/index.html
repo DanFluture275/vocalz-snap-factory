@@ -324,6 +324,34 @@
             margin-bottom: 20px;
         }
         
+        /* Style pour la liste déroulante emotion */
+        .advanced-settings select {
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            transition: background-color 0.3s ease;
+            
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px 12px;
+        }
+
+        .advanced-settings select:hover {
+            background-color: #444;
+        }
+
+        .advanced-settings select:focus {
+            outline: none;
+            border-color: #fff;
+            background-color: #444;
+        }
+        
         .toggle-button {
             background-color: #e85354;
             color: white;
@@ -406,45 +434,50 @@
                     <div class="play-icon">⏵</div>
                     <div class="voice-label">Vintage Radio</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Preacher" data-audio-url="{{ url_for('static', filename='audio/preacher.mp3') }}">
-                    <img src="{{ url_for('static', filename='images/precheur.jpeg') }}" alt="Preacher Voice">
+                <div class="carousel-item" data-voice-path="40s Movie Star" data-audio-url="{{ url_for('static', filename='audio/40s_movie_star.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/40s_movie_star.jpeg') }}" alt="40s Movie Star Voice">
                     <div class="play-icon">⏵</div>
-                    <div class="voice-label">Preacher</div>
+                    <div class="voice-label">40s Movie Star</div>
                 </div>
                 <div class="carousel-item" data-voice-path="Old Rastaman" data-audio-url="{{ url_for('static', filename='audio/old_rastaman.mp3') }}">
                     <img src="{{ url_for('static', filename='images/rasta.jpg') }}" alt="Old Rastaman Voice">
                     <div class="play-icon">⏵</div>
                     <div class="voice-label">Old Rastaman</div>
                 </div>
-                <div class="carousel-item" data-voice-path="Film Noir" data-audio-url="{{ url_for('static', filename='audio/film_noir.mp3') }}">
-                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                <div class="carousel-item" data-voice-path="Italian Mafiosi" data-audio-url="{{ url_for('static', filename='audio/italian_mafiosi.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/italian_mafiosi.jpeg') }}" alt="Italian Mafiosi Voice">
                     <div class="play-icon">⏵</div>
-                    <div class="voice-label">Film Noir</div>
-                </div>
-               <div class="carousel-item" data-voice-path="Epic Trailer" data-audio-url="{{ url_for('static', filename='audio/epic_trailer.mp3') }}">
-                    <img src="{{ url_for('static', filename='images/epic_cinematic.jpeg') }}" alt="Epic Trailer Voice">
-                    <div class="play-icon">⏵</div>
-                   <div class="voice-label">Epic Trailer</div>
+                    <div class="voice-label">Italian Mafiosi</div>
                 </div>
                 <div class="carousel-item" data-voice-path="Funky" data-audio-url="{{ url_for('static', filename='audio/funky.mp3') }}">
                     <img src="{{ url_for('static', filename='images/funky.jpeg') }}" alt="Funky Voice">
                     <div class="play-icon">⏵</div>
                     <div class="voice-label">Funky</div>
                 </div>
+                <div class="carousel-item" data-voice-path="Grandma" data-audio-url="{{ url_for('static', filename='audio/grandma.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/grandma.jpeg') }}" alt="Grandma Voice">
+                    <div class="play-icon">⏵</div>
+                    <div class="voice-label">Rock'n Roll Grandma</div>
+                </div>
+               <div class="carousel-item" data-voice-path="Epic Trailer" data-audio-url="{{ url_for('static', filename='audio/epic_trailer.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/epic_cinematic.jpeg') }}" alt="Epic Trailer Voice">
+                    <div class="play-icon">⏵</div>
+                   <div class="voice-label">Epic Trailer</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Preacher" data-audio-url="{{ url_for('static', filename='audio/preacher.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/precheur.jpeg') }}" alt="Preacher Voice">
+                    <div class="play-icon">⏵</div>
+                    <div class="voice-label">Apocalyptic Preacher</div>
+                </div>
+                <div class="carousel-item" data-voice-path="Film Noir" data-audio-url="{{ url_for('static', filename='audio/film_noir.mp3') }}">
+                    <img src="{{ url_for('static', filename='images/vieux_film.jpeg') }}" alt="Film Noir Voice">
+                    <div class="play-icon">⏵</div>
+                    <div class="voice-label">Film Noir</div>
+                </div>
                 <div class="carousel-item" data-voice-path="Vintage Documentary" data-audio-url="{{ url_for('static', filename='audio/vintage_documentary.mp3') }}">
                     <img src="{{ url_for('static', filename='images/vintage_documentary.jpeg') }}" alt="Vintage Documentary Voice">
                     <div class="play-icon">⏵</div>
                     <div class="voice-label">Vintage Documentary</div>
-                </div>
-                <div class="carousel-item" data-voice-path="Italian Mafiosi" data-audio-url="{{ url_for('static', filename='audio/italian_mafiosi.mp3') }}">
-                    <img src="{{ url_for('static', filename='images/italian_mafiosi.jpeg') }}" alt="Italian Mafiosi Voice">
-                    <div class="play-icon">⏵</div>
-                    <div class="voice-label">Italian Mafiosi</div>
-                </div>
-                <div class="carousel-item" data-voice-path="Grandma" data-audio-url="{{ url_for('static', filename='audio/grandma.mp3') }}">
-                    <img src="{{ url_for('static', filename='images/grandma.jpeg') }}" alt="Grandma Voice">
-                    <div class="play-icon">⏵</div>
-                    <div class="voice-label">Grandma</div>
                 </div>
             </div>
                     <!-- Ajout des flèches de navigation -->
@@ -477,28 +510,42 @@
         </div>
         <div class="advanced-settings" id="advanced-settings">
             <label for="speed">⚡ Tempo Boost</label>
-            <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+            <input type="range" id="speed" min="0.1" max="5" step="0.1" value="1">
             <span id="speed-value">1.0</span>
 
-            <label for="temperature">🎲 Spice Level</label>
-            <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.7">
-            <span id="temperature-value">0.7</span>
-
-            <label for="top_p">🎯 Creative Freedom</label>
-            <input type="range" id="top_p" min="0" max="1" step="0.1" value="0.9">
-            <span id="top_p-value">0.9</span>
-
-            <label for="text_guidance">📖 Script Strictness</label>
-            <input type="range" id="text_guidance" min="0" max="1" step="0.1" value="0.5">
-            <span id="text_guidance-value">0.5</span>
-
-            <label for="voice_guidance">🔊 Voice Fidelity</label>
-            <input type="range" id="voice_guidance" min="0" max="1" step="0.1" value="0.8">
-            <span id="voice_guidance-value">0.8</span>
+            <label for="emotion">🎭 Emotion</label>
+            <select id="emotion">
+                <option value="">Neutral</option>
+                <option value="male_happy">Happy (male)</option>
+                <option value="male_sad">Sad (male)</option>
+                <option value="male_angry">Angry (male)</option>
+                <option value="male_fearful">Fearful (male)</option>
+                <option value="male_disgust">Disgust (male)</option>
+                <option value="male_surprised">Surprised (male)</option>
+                <option value="female_happy">Happy (female)</option>
+                <option value="female_sad">Sad (female)</option>
+                <option value="female_angry">Angry (female)</option>
+                <option value="female_fearful">Fearful (female)</option>
+                <option value="female_disgust">Disgust (female)</option>
+                <option value="female_surprised">Surprised (female)</option>
+            </select>
 
             <label for="style_guidance">🎤 Dramatic Flair</label>
-            <input type="range" id="style_guidance" min="0" max="1" step="0.1" value="0.6">
-            <span id="style_guidance-value">0.6</span>
+            <input type="range" id="style_guidance" min="0.1" max="10" step="0.1" value="7">
+            <span id="style_guidance-value">7</span>
+            
+            <label for="temperature">🎲 Spice Level</label>
+            <input type="range" id="temperature" min="0.1" max="2" step="0.1" value="1.5">
+            <span id="temperature-value">1.5</span>
+
+            <label for="text_guidance">📖 Script Strictness</label>
+            <input type="range" id="text_guidance" min="1" max="2" step="0.1" value="1.5">
+            <span id="text_guidance-value">1.5</span>
+
+            <label for="voice_guidance">🔊 Voice Fidelity</label>
+            <input type="range" id="voice_guidance" min="0.1" max="2" step="0.1" value="1.5">
+            <span id="voice_guidance-value">1.5</span>
+
         </div>
     </div>
 
@@ -585,10 +632,10 @@
             const toggleButton = document.getElementById('toggle-advanced-settings');
             if (advancedSettings.style.display === 'none' || advancedSettings.style.display === '') {
                 advancedSettings.style.display = 'block';
-                toggleButton.textContent = 'Hide Advanced Settings';
+                toggleButton.textContent = '⚙️ Hide Advanced Settings';
             } else {
                 advancedSettings.style.display = 'none';
-                toggleButton.textContent = 'Show Advanced Settings';
+                toggleButton.textContent = '⚙️ Show Advanced Settings';
             }
         });
         
@@ -605,48 +652,55 @@
         // Mettre à jour les valeurs des sliders au chargement de la page
         updateSliderValue('speed', 'speed-value');
         updateSliderValue('temperature', 'temperature-value');
-        updateSliderValue('top_p', 'top_p-value');
         updateSliderValue('text_guidance', 'text_guidance-value');
         updateSliderValue('voice_guidance', 'voice_guidance-value');
         updateSliderValue('style_guidance', 'style_guidance-value');
         
         // Gestion des boutons play/pause exemples audio
-        document.querySelectorAll('.carousel-item .play-icon').forEach(icon => {
-            let audio = null; // Stocke l'instance Audio pour chaque bouton
-            let isPlaying = false;
+        let currentAudio = null; // Stocke l'audio en cours de lecture
+        let currentIcon = null;  // Stocke l'icône du bouton en cours
 
+        document.querySelectorAll('.carousel-item .play-icon').forEach(icon => {
             icon.addEventListener('click', (event) => {
                 event.stopPropagation(); // Empêche le clic de sélectionner le carousel-item
 
-                if (!audio) {
-                    const audioUrl = event.target.parentElement.dataset.audioUrl;
-                    audio = new Audio(audioUrl);
-                    audio.addEventListener('ended', () => {
-                        togglePlayPause(icon, false);
-                        isPlaying = false; // Réinitialise l'état après la fin de la lecture
-                    });
+                const audioUrl = event.target.parentElement.dataset.audioUrl;
+
+                // Si un autre audio est en cours de lecture, on l'arrête
+                if (currentAudio && !currentAudio.paused) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0; // Remet l'audio au début
+
+                    // Remettre l'icône de l'ancien bouton à "play"
+                    if (currentIcon) {
+                        togglePlayPause(currentIcon, false);
+                    }
                 }
 
-                if (isPlaying) {
-                    audio.pause();
-                    audio.currentTime = 0; // Remet le son au début pour être sûr qu'il recommence bien
-                    togglePlayPause(icon, false);
-                    isPlaying = false;
-                } else {
-                    audio.play();
-                    togglePlayPause(icon, true);
-                    isPlaying = true;
+                // Si c'est le même audio, on arrête et on sort
+                if (currentAudio && currentAudio.src === new Audio(audioUrl).src) {
+                    currentAudio = null;
+                    currentIcon = null;
+                    return;
                 }
+
+                // Créer une nouvelle instance audio et la jouer
+                currentAudio = new Audio(audioUrl);
+                currentIcon = icon;
+
+                currentAudio.addEventListener('ended', () => {
+                    togglePlayPause(icon, false);
+                    currentAudio = null;
+                    currentIcon = null;
+                });
+
+                currentAudio.play();
+                togglePlayPause(icon, true);
             });
         });
 
-
         function togglePlayPause(icon, isPlaying) {
-            if (isPlaying) {
-                icon.textContent = '⏸';
-            } else {
-                icon.textContent = '⏵';
-            }
+            icon.textContent = isPlaying ? '⏸' : '⏵';
         }
 
         document.getElementById('create-sample-btn').addEventListener('click', async () => {
@@ -667,9 +721,9 @@
             const advancedOptions = {
                 speed: document.getElementById('speed').value,
                 temperature: document.getElementById('temperature').value,
-                top_p: document.getElementById('top_p').value,
                 text_guidance: document.getElementById('text_guidance').value,
                 voice_guidance: document.getElementById('voice_guidance').value,
+                emotion: document.getElementById('emotion').value,
                 style_guidance: document.getElementById('style_guidance').value
             };
             
@@ -710,7 +764,8 @@
         function getVoiceModelPath(voiceType) {
             const voicePaths = {
                 'Vintage Radio': 's3://voice-cloning-zero-shot/da861ac7-44d1-41c2-bdd7-5579b07e46de/original/manifest.json',
-                'Preacher': 's3://voice-cloning-zero-shot/7eba2ab9-f733-4b44-b390-7f42a3d6cf3d/original/manifest.json',
+                'Preacher': 's3://voice-cloning-zero-shot/87cd4c73-38a1-4ccd-9c34-f52ab84efc0d/original/manifest.json',
+                '40s Movie Star':'s3://voice-cloning-zero-shot/b16ae1b8-371b-4feb-b890-9995fdb48e36/original/manifest.json',
                 'Old Rastaman': 's3://voice-cloning-zero-shot/ff240cd0-de2b-4c6c-8634-f802be2a73e0/original/manifest.json',
                 'Film Noir': 's3://voice-cloning-zero-shot/26c2de86-1c4f-4e33-9950-767f9f0b07ad/original/manifest.json',
                 'Epic Trailer': 's3://voice-cloning-zero-shot/988aab38-552c-4fa4-88ce-37538ba0c71b/original/manifest.json',
@@ -755,7 +810,8 @@
             });
         }
 
-        document.getElementById('inspiration-btn').addEventListener('click', () => {
+       /* OLD quotes
+       document.getElementById('inspiration-btn').addEventListener('click', () => {
             fetch('/static/quotes.json')
                 .then(response => response.json())
                 .then(data => {
@@ -765,6 +821,18 @@
                 })
                 .catch(error => console.error('Error fetching quotes:', error));
         });
+        */
+        document.getElementById('inspiration-btn').addEventListener('click', () => {
+            fetch('/static/punchlines.json')
+                .then(response => response.json())
+                .then(data => {
+                    const randomIndex = Math.floor(Math.random() * data.punchlines.length);
+                    const randomPunchline = data.punchlines[randomIndex];
+                    document.getElementById('text-input').value = randomPunchline;
+                })
+                .catch(error => console.error('Error fetching punchlines:', error));
+        });
+
     </script>
 </body>
 </html>
