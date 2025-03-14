@@ -93,18 +93,30 @@ def generate_audio():
         voice_engine = "Play3.0-mini"
 
     # Construction des paramètres pour l'API PlayHT
-    params = {
-        "voice_engine": voice_engine,
-        "output_format": output_format,
-        "text": text,
-        "voice": voice_model_path,
-        "speed": speed,
-        "temperature": temperature,
-        "text_guidance": text_guidance,
-        "voice_guidance": voice_guidance,
-        "style_guidance": style_guidance,
-        "language": language
-    }
+    if language=="english":
+        params = {
+            "voice_engine": voice_engine,
+            "output_format": output_format,
+            "text": text,
+            "voice": voice_model_path,
+            "speed": speed,
+            "temperature": temperature,
+            "text_guidance": text_guidance,
+            "voice_guidance": voice_guidance,
+        }
+    else:
+        params = {
+            "voice_engine": voice_engine,
+            "output_format": output_format,
+            "text": text,
+            "voice": voice_model_path,
+            "speed": speed,
+            "temperature": temperature,
+            "text_guidance": text_guidance,
+            "voice_guidance": voice_guidance,
+            "style_guidance": style_guidance,
+            "language": language
+        }
 
     # Ajout du paramètre emotion uniquement s'il n'est pas vide
     if emotion:
