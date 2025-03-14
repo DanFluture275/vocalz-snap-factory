@@ -509,13 +509,49 @@
             <button class="toggle-button" id="toggle-advanced-settings">⚙️ Show Advanced Settings</button>
         </div>
         <div class="advanced-settings" id="advanced-settings">
-            <label for="speed">⚡ Tempo Boost</label>
+            <label id="languageLabel">🌎 Language</label>
+            <select id="language">
+                <option value="afrikaans">Afrikaans</option>
+                <option value="arabic">Arabic</option>
+                <option value="bengali">Bengali</option>
+                <option value="bulgarian">Bulgarian</option>
+                <option value="croatian">Croatian</option>
+                <option value="czech">Czech</option>
+                <option value="danish">Danish</option>
+                <option value="dutch">Dutch</option>
+                <option selected="selected" value="english">English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="greek">Greek</option>
+                <option value="hebrew">Hebrew</option>
+                <option value="hindi">Hindi</option>
+                <option value="hungarian">Hungarian</option>
+                <option value="indonesian">Indonesian</option>
+                <option value="italian">Italian</option>
+                <option value="japanese">Japanese</option>
+                <option value="korean">Korean</option>
+                <option value="malay">Malay</option>
+                <option value="mandarin">Mandarin</option>
+                <option value="polish">Polish</option>
+                <option value="portuguese">Portuguese</option>
+                <option value="russian">Russian</option>
+                <option value="serbian">Serbian</option>
+                <option value="spanish">Spanish</option>
+                <option value="swedish">Swedish</option>
+                <option value="tagalog">Tagalog</option>
+                <option value="thai">Thai</option>
+                <option value="turkish">Turkish</option>
+                <option value="ukrainian">Ukrainian</option>
+                <option value="urdu">Urdu</option>
+                <option value="xhosa">Xhosa</option>
+            </select>
+            <label for="speed">⚡ Speed Control</label>
             <input type="range" id="speed" min="0.1" max="5" step="0.1" value="1">
             <span id="speed-value">1.0</span>
 
-            <label for="emotion">🎭 Emotion</label>
+            <label id="emotionLabel">🎭 Emotion</label>
             <select id="emotion">
-                <option value="">Neutral</option>
+                <option selected="selected" value="">Neutral</option>
                 <option value="male_happy">Happy (male)</option>
                 <option value="male_sad">Sad (male)</option>
                 <option value="male_angry">Angry (male)</option>
@@ -530,7 +566,7 @@
                 <option value="female_surprised">Surprised (female)</option>
             </select>
 
-            <label for="style_guidance">🎤 Dramatic Flair</label>
+            <label id="style_guidanceLabel">🎤 Dramatic Flair (for emotion intensity)</label>
             <input type="range" id="style_guidance" min="0.1" max="10" step="0.1" value="7">
             <span id="style_guidance-value">7</span>
             
@@ -656,6 +692,54 @@
         updateSliderValue('voice_guidance', 'voice_guidance-value');
         updateSliderValue('style_guidance', 'style_guidance-value');
         
+        //Fonction pour masquer l'émotion et le style guidance (dramatic flair) quand la langue n'est pas l'anglais
+        document.addEventListener("DOMContentLoaded", function () {
+            const languageSelect = document.getElementById("language");
+
+            // Sélection des éléments à cacher
+            const emotionLabel = document.getElementById("emotionLabel");
+            const emotionField = document.getElementById("emotion");
+
+            const styleGuidanceLabel = document.getElementById("style_guidanceLabel");
+            const styleGuidanceField = document.getElementById("style_guidance");
+            const styleGuidanceValue = document.getElementById("style_guidance-value");
+
+            function updateAdvancedSettings() {
+                if (languageSelect.value !== "english") {
+                    // Masquer uniquement Emotion et Dramatic Flair (et leurs labels)
+                    emotionLabel.style.display = "none";
+                    emotionField.style.display = "none";
+
+                    styleGuidanceLabel.style.display = "none";
+                    styleGuidanceField.style.display = "none";
+                    styleGuidanceValue.style.display = "none"; // Cache aussi la valeur affichée
+
+                    // Réinitialiser les valeurs
+                    emotionField.value = "";
+                    styleGuidanceField.value = "7";
+                    styleGuidanceValue.textContent = "7";
+                } else {
+                    // Réafficher les champs et labels
+                    emotionLabel.style.display = "";
+                    emotionField.style.display = "";
+
+                    styleGuidanceLabel.style.display = "";
+                    styleGuidanceField.style.display = "";
+                    styleGuidanceValue.style.display = "";
+                }
+            }
+
+            // Appliquer la mise à jour lors du changement de langue
+            languageSelect.addEventListener("change", updateAdvancedSettings);
+
+            // Appliquer la mise à jour au chargement initial
+            updateAdvancedSettings();
+        });
+
+
+
+
+        
         // Gestion des boutons play/pause exemples audio
         let currentAudio = null; // Stocke l'audio en cours de lecture
         let currentIcon = null;  // Stocke l'icône du bouton en cours
@@ -724,7 +808,8 @@
                 text_guidance: document.getElementById('text_guidance').value,
                 voice_guidance: document.getElementById('voice_guidance').value,
                 emotion: document.getElementById('emotion').value,
-                style_guidance: document.getElementById('style_guidance').value
+                style_guidance: document.getElementById('style_guidance').value,
+                language: document.getElementById('language').value,
             };
             
             try {
