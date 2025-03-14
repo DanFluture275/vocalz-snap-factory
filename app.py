@@ -84,6 +84,7 @@ def generate_audio():
     voice_guidance = float(data.get("voice_guidance", 1.5))
     style_guidance = float(data.get("style_guidance", 7))
     emotion = data.get("emotion", "")  # Récupération de la valeur de emotion
+    language = data.get("language", "")
 
     # Définition du voice_engine en fonction de la valeur de emotion
     if emotion:
@@ -101,7 +102,8 @@ def generate_audio():
         "temperature": temperature,
         "text_guidance": text_guidance,
         "voice_guidance": voice_guidance,
-        "style_guidance": style_guidance
+        "style_guidance": style_guidance,
+        "language": language
     }
 
     # Ajout du paramètre emotion uniquement s'il n'est pas vide

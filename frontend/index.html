@@ -509,6 +509,46 @@
             <button class="toggle-button" id="toggle-advanced-settings">⚙️ Show Advanced Settings</button>
         </div>
         <div class="advanced-settings" id="advanced-settings">
+            <label for="emotion">🌎 Language</label>
+            <select id="language">
+                <option value="afrikaans">afrikaans</option>
+                <option value="albanian">albanian</option>
+                <option value="amharic">amharic</option>
+                <option value="arabic">arabic</option>
+                <option value="bengali">bengali</option>
+                <option value="bulgarian">bulgarian</option>
+                <option value="catalan">catalan</option>
+                <option value="croatian">croatian</option>
+                <option value="czech">czech</option>
+                <option value="danish">danish</option>
+                <option value="dutch">dutch</option>
+                <option selected="selected" value="english">english</option>
+                <option value="french">french</option>
+                <option value="galician">galician</option>
+                <option value="german">german</option>
+                <option value="greek">greek</option>
+                <option value="hebrew">hebrew</option>
+                <option value="hindi">hindi</option>
+                <option value="hungarian">hungarian</option>
+                <option value="indonesian">indonesian</option>
+                <option value="italian">italian</option>
+                <option value="japanese">japanese</option>
+                <option value="korean">korean</option>
+                <option value="malay">malay</option>
+                <option value="mandarin">mandarin</option>
+                <option value="polish">polish</option>
+                <option value="portuguese">portuguese</option>
+                <option value="russian">russian</option>
+                <option value="serbian">serbian</option>
+                <option value="spanish">spanish</option>
+                <option value="swedish">swedish</option>
+                <option value="tagalog">tagalog</option>
+                <option value="thai">thai</option>
+                <option value="turkish">turkish</option>
+                <option value="ukrainian">ukrainian</option>
+                <option value="urdu">urdu</option>
+                <option value="xhosa">xhosa</option>
+            </select>
             <label for="speed">⚡ Tempo Boost</label>
             <input type="range" id="speed" min="0.1" max="5" step="0.1" value="1">
             <span id="speed-value">1.0</span>
@@ -724,7 +764,8 @@
                 text_guidance: document.getElementById('text_guidance').value,
                 voice_guidance: document.getElementById('voice_guidance').value,
                 emotion: document.getElementById('emotion').value,
-                style_guidance: document.getElementById('style_guidance').value
+                style_guidance: document.getElementById('style_guidance').value,
+                language: document.getElementById('language').value,
             };
             
             try {
